@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./client
+    container_name: client
+    volumes:
+      - ./client/src:/app/src #bind mount
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - "8000:8000"
+    volumes:
+      - logs:/app/logs #volume
+      - ./server:/app #bind mount
+      - /app/node_modules
+    env_file:
+      - ./env/server.env
+
+volumes:
+  logs:
+
