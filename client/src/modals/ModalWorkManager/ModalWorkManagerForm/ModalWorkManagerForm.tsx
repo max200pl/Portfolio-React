@@ -118,8 +118,10 @@ const ModalWorkManagerForm: FC<Props> = ({ onClose, work }) => {
             const name = getImageName(nameCardImage);
             const project = getFolderName(nameCardImage);
 
+            const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '';
+
             setUrlImage(
-                `http://localhost:8000/works/image?project=${project}&name=${name}`
+                `${NODE_ENV}/api/works/image?project=${project}&name=${name}`
             );
         }
     }, [typeActionForm, work]);

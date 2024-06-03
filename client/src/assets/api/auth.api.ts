@@ -3,7 +3,10 @@ import { baseQuery } from './api.helper';
 import { SubmitSignUpFormValues } from '../../pages/Auth/AuthSignUp/AuthSignUp';
 import { SubmitSignInFormValues } from '../../pages/Auth/AuthSignIn/AuthSignIn';
 
-const AUTH_API_BASE_URL = "http://localhost:8000/auth";
+// const AUTH_API_BASE_URL = "http://localhost:8000/auth";
+// const AUTH_API_BASE_URL = "/api/auth";
+
+const AUTH_API_BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:8000/api/auth" : "/api/auth";
 
 export type TypeActionAuth = "sign-up" | "login";
 
@@ -44,7 +47,7 @@ export const logOutUser = () => {
     const baseQueryFn = baseQuery;
 
     return baseQueryFn({
-        url: AUTH_API_BASE_URL + '/logout',
+        url: `${AUTH_API_BASE_URL}/logout`,
         method: 'post',
         credentials: 'include'
     })

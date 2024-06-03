@@ -72,7 +72,10 @@ export const getUrlWorkImage = (image) => {
     const folderName = getFolderName(image)
     const imageName = getImageName(image)
 
-    return `http://localhost:8000/works/image?project=${folderName}&name=${imageName}`
+    // return `http://localhost:8000/works/image?project=${folderName}&name=${imageName}`
+    const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '';
+
+    return `${NODE_ENV}/api/works/image?project=${folderName}&name=${imageName}`
 }
 
 export const getUniqCategoriesWork = (categories) => {

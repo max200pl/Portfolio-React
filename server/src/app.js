@@ -9,6 +9,6 @@ app.use(cors({
 }))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // parse all incoming json from the body incoming request
-app.use('/', api);
+app.use('/api', api);
 
 module.exports = app;

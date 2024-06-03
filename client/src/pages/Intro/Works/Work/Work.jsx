@@ -12,7 +12,9 @@ export const Work = ({
 }) => {
     const imageName = getImageName(cardImage.name)
     const folderName = getFolderName(cardImage.name)
-    const urlImage = `http://localhost:8000/works/image?project=${folderName}&name=${imageName}`;
+    // const urlImage = `http://localhost:8000/works/image?project=${folderName}&name=${imageName}`;
+    const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '';
+    const urlImage = `${NODE_ENV}/api/works/image?project=${folderName}&name=${imageName}`;
 
     return (
         <div className={s.work}

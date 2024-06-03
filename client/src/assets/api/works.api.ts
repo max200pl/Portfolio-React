@@ -14,7 +14,9 @@ import {
 import { IWork } from "../interfaces/interfaces";
 import { baseQuery, BaseQueryOptions } from "./api.helper";
 
-const WORKS_API_BASE_URL = "http://localhost:8000/works";
+// const WORKS_API_BASE_URL = "http://localhost:8000/works";
+// const WORKS_API_BASE_URL = "/api/works";
+const WORKS_API_BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/works' : "/api/works";
 
 export type TypeActionForm = "update" | "create" | "delete";
 
