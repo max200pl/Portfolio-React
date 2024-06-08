@@ -118,7 +118,7 @@ const ModalWorkManagerForm: FC<Props> = ({ onClose, work }) => {
             const name = getImageName(nameCardImage);
             const project = getFolderName(nameCardImage);
 
-            const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '';
+            const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
 
             setUrlImage(
                 `${NODE_ENV}/api/works/image?project=${project}&name=${name}`

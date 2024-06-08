@@ -8,15 +8,16 @@ import {
     useQueryClient,
 } from "@tanstack/react-query";
 import { fillFormData } from "../helpers/helpers";
-import {
-    InterfaceTechnologies,
-} from "../interfaces/interfaces";
+import { InterfaceTechnologies } from "../interfaces/interfaces";
 import { IWork } from "../interfaces/interfaces";
 import { baseQuery, BaseQueryOptions } from "./api.helper";
 
 // const WORKS_API_BASE_URL = "http://localhost:8000/works";
 // const WORKS_API_BASE_URL = "/api/works";
-const WORKS_API_BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/works' : "/api/works";
+const WORKS_API_BASE_URL =
+    process.env.NODE_ENV === "development"
+        ? "http://localhost:8000/api/works"
+        : "https://portfolio-react-2xm7e44fdq-lm.a.run.app/api/works";
 
 export type TypeActionForm = "update" | "create" | "delete";
 
@@ -42,12 +43,19 @@ export const useGetWorksQuery = (filter: { category: string }) => {
     });
 };
 
-
 export interface SaveWork extends Omit<IWork, "cardImage"> {
     image: File | undefined;
 }
 
-const deleteWork = async ({ workId, typeActionForm, method }: { workId: IWork["_id"], typeActionForm: TypeActionForm, method: BaseQueryOptions["method"] }): Promise<IWork["_id"]> => {
+const deleteWork = async ({
+    workId,
+    typeActionForm,
+    method,
+}: {
+    workId: IWork["_id"];
+    typeActionForm: TypeActionForm;
+    method: BaseQueryOptions["method"];
+}): Promise<IWork["_id"]> => {
     try {
         const url = `${WORKS_API_BASE_URL}/${typeActionForm}`;
 
@@ -70,7 +78,8 @@ export const useDeleteWorkMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation<IWork["_id"], Error, IWork["_id"]>({
-        mutationFn: (workId) => deleteWork({ workId, typeActionForm: "delete", method: "delete" }),
+        mutationFn: (workId) =>
+            deleteWork({ workId, typeActionForm: "delete", method: "delete" }),
         onSuccess: () => {
             queryClient.invalidateQueries([Tag.WORKS] as InvalidateQueryFilters);
         },
@@ -80,7 +89,15 @@ export const useDeleteWorkMutation = () => {
     });
 };
 
-const saveWork = async ({ work, typeActionForm, method }: { work: SaveWork | Partial<SaveWork>, typeActionForm: TypeActionForm, method: BaseQueryOptions["method"] }): Promise<IWork> => {
+const saveWork = async ({
+    work,
+    typeActionForm,
+    method,
+}: {
+    work: SaveWork | Partial<SaveWork>;
+    typeActionForm: TypeActionForm;
+    method: BaseQueryOptions["method"];
+}): Promise<IWork> => {
     try {
         const url = `${WORKS_API_BASE_URL}/${typeActionForm}`;
         const contentType = "multipart/form-data";
@@ -115,7 +132,8 @@ export const useCreateWorkMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation<IWork, Error, SaveWork, unknown>({
-        mutationFn: (work) => saveWork({ work, typeActionForm: "create", method: "post" }),
+        mutationFn: (work) =>
+            saveWork({ work, typeActionForm: "create", method: "post" }),
         onSuccess: () => {
             queryClient.invalidateQueries([Tag.WORKS] as InvalidateQueryFilters);
         },
@@ -129,7 +147,8 @@ export const useUpdateWorkMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation<IWork, Error, Partial<SaveWork>, unknown>({
-        mutationFn: (work: Partial<SaveWork>) => saveWork({ work, typeActionForm: "update", method: "put" }),
+        mutationFn: (work: Partial<SaveWork>) =>
+            saveWork({ work, typeActionForm: "update", method: "put" }),
         onSuccess: () => {
             queryClient.invalidateQueries([Tag.WORKS] as InvalidateQueryFilters);
         },

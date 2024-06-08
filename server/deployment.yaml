@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-react #name of the deployment
+  labels:
+    group: backend #label
+spec: #configurer the deployment
+  replicas: 1 #hove many pods
+  selector: #select the pods to manage by the deployment controller
+    matchLabels: #match the labels
+      app: portfolio-react #label
+      tier: backend #label
+  template:
+    metadata:
+      labels:
+        app: portfolio-react #label
+        tier: backend #label
+    spec:
+      containers: #specify the containers
+        - name: prod-server
+          imagePullPolicy: Always
+          image: maksymposkannyi/portfolio-react-prod-server:latest
+          env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: portfolio-react-config
+                  key: server-port
+          ports:
+            - containerPort: 8000
+          livenessProbe: # check the health of the pod
+            httpGet:
+              path: /api/works
+              port: 8000
+            initialDelaySeconds: 3 #delay before the probe starts
+            periodSeconds: 3 #how often to perform the probe
+            timeoutSeconds: 1 #when the probe times out
+            successThreshold: 1 #how many times the probe must be successful
+            failureThreshold: 3 #how many times the probe must fail

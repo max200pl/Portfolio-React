@@ -4,7 +4,9 @@ const api = require("./routes/api");
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: function (origin, callback) {
+        callback(null, true)
+    },
     credentials: true,
 }))
 app.use(express.urlencoded({ extended: true }));
