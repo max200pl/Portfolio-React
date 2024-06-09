@@ -3,6 +3,9 @@ version: "3.8"
 services:
   client:
     build: ./client
+    environment:
+      REACT_APP_MODE: "development"
+      REACT_APP_SERVER_URL: "http://localhost"
     container_name: client
     volumes:
       - ./client/src:/app/src #bind mount
@@ -16,7 +19,7 @@ services:
     build: ./server
     container_name: server
     ports:
-      - "8000:8000"
+      - "80:80"
     volumes:
       - logs:/app/logs #volume
       - ./server:/app #bind mount

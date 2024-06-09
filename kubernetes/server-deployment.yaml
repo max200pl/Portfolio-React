@@ -1,33 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portfolio-react #name of the deployment
-  labels:
-    group: backend #label
+  name: server-deployment #name of the deployment
 spec: #configurer the deployment
   replicas: 1 #hove many pods
   selector: #select the pods to manage by the deployment controller
     matchLabels: #match the labels
       app: portfolio-react #label
-      tier: backend #label
+      app: server #label
   template:
     metadata:
       labels:
         app: portfolio-react #label
-        tier: backend #label
+        group: server #label
     spec:
       containers: #specify the containers
-        - name: prod-server
+        - name: server
           imagePullPolicy: Always
           image: maksymposkannyi/portfolio-react-prod-server:latest
-          env:
-            - name: SERVER_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: portfolio-react-config
-                  key: server-port
-          ports:
-            - containerPort: 80
           livenessProbe: # check the health of the pod
             httpGet:
               path: /api/works

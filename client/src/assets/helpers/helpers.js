@@ -73,9 +73,10 @@ export const getUrlWorkImage = (image) => {
     const imageName = getImageName(image)
 
     // return `http://localhost:8000/works/image?project=${folderName}&name=${imageName}`
-    const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
-
-    return `${NODE_ENV}/api/works/image?project=${folderName}&name=${imageName}`
+    // const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
+    // const BASE_URL = `http://${process.env.REACT_APP_SERVER_URL}`;
+    // return `${BASE_URL}/api/works/image?project=${folderName}&name=${imageName}`;
+    return `/api/works/image?project=${folderName}&name=${imageName}`;
 }
 
 export const getUniqCategoriesWork = (categories) => {

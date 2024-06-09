@@ -118,10 +118,14 @@ const ModalWorkManagerForm: FC<Props> = ({ onClose, work }) => {
             const name = getImageName(nameCardImage);
             const project = getFolderName(nameCardImage);
 
-            const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
 
+            // const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
+            // const BASE_URL = `http://${process.env.REACT_APP_SERVER_URL}`;
+            // setUrlImage(
+            //     `${BASE_URL}/api/works/image?project=${project}&name=${name}`
+            // );
             setUrlImage(
-                `${NODE_ENV}/api/works/image?project=${project}&name=${name}`
+                `/api/works/image?project=${project}&name=${name}`
             );
         }
     }, [typeActionForm, work]);

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio-react #label
+      app: client
+  template:
+    metadata:
+      labels:
+        app: portfolio-react #label
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: maksymposkannyi/portfolio-react-prod-client:latest
+          env:
+            - name: REACT_APP_SERVER_URL
+              #value: `10.99.104.252`
+              volume: "server-service.default"
+
+

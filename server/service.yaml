@@ -10,5 +10,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80 #port of the service
-      targetPort: 8000 #port of the pod
+      targetPort: 80 #port of the pod
   type: LoadBalancer #expose the service to the internet
