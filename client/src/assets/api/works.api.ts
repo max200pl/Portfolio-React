@@ -20,7 +20,7 @@ import { baseQuery, BaseQueryOptions } from "./api.helper";
 //         ? "http://localhost:8000/api/works"
 //         : "https://portfolio-react-2xm7e44fdq-lm.a.run.app/api/works";
 
-const WORKS_API_BASE_URL = `/api/works`
+const WORKS_API_BASE_URL = process.env.REACT_APP_MODE === "development" ? `http://${process.env.REACT_APP_SERVER_URL}/api/works` : `/api/works`
 
 export type TypeActionForm = "update" | "create" | "delete";
 

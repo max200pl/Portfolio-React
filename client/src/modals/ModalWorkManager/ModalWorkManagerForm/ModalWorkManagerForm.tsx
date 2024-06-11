@@ -124,7 +124,7 @@ const ModalWorkManagerForm: FC<Props> = ({ onClose, work }) => {
             // setUrlImage(
             //     `${BASE_URL}/api/works/image?project=${project}&name=${name}`
             // );
-            setUrlImage(
+            setUrlImage(process.env.REACT_APP_MODE === "development" ? `http://${process.env.REACT_APP_SERVER_URL}/api/works/image?project=${project}&name=${name}` :
                 `/api/works/image?project=${project}&name=${name}`
             );
         }

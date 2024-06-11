@@ -7,7 +7,7 @@ spec: #configurer the deployment
   selector: #select the pods to manage by the deployment controller
     matchLabels: #match the labels
       app: portfolio-react #label
-      app: server #label
+      group: server #label
   template:
     metadata:
       labels:
@@ -17,13 +17,39 @@ spec: #configurer the deployment
       containers: #specify the containers
         - name: server
           imagePullPolicy: Always
-          image: maksymposkannyi/portfolio-react-prod-server:latest
-          livenessProbe: # check the health of the pod
-            httpGet:
-              path: /api/works
-              port: 80
-            initialDelaySeconds: 3 #delay before the probe starts
-            periodSeconds: 3 #how often to perform the probe
-            timeoutSeconds: 1 #when the probe times out
-            successThreshold: 1 #how many times the probe must be successful
-            failureThreshold: 3 #how many times the probe must fail
+          image: maksymposkannyi/portfolio-react-prod-server
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: my-secrets
+                  key: MONGO_URL
+            - name: GITHUB_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: my-secrets
+                  key: GITHUB_CLIENT_ID
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: my-secrets
+                  key: GITHUB_CLIENT_SECRET
+            - name: COOKIE_KEY_1
+              valueFrom:
+                configMapKeyRef:
+                  name: my-secrets
+                  key: COOKIE_KEY_1
+            - name: COOKIE_KEY_2
+              valueFrom:
+                configMapKeyRef:
+                  name: my-secrets
+                  key: COOKIE_KEY_2
+          # livenessProbe: # check the health of the pod
+          #   httpGet:
+          #     path: /api/works
+          #     port: 8000
+          #   initialDelaySeconds: 3 #delay before the probe starts
+          #   periodSeconds: 3 #how often to perform the probe
+          #   timeoutSeconds: 1 #when the probe times out
+          #   successThreshold: 1 #how many times the probe must be successful
+          #   failureThreshold: 3 #how many times the probe must fail

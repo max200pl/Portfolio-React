@@ -7,7 +7,7 @@ import { SubmitSignInFormValues } from '../../pages/Auth/AuthSignIn/AuthSignIn';
 // const AUTH_API_BASE_URL = "/api/auth";
 
 // const AUTH_API_BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:8000/api/auth" : "https://portfolio-react-2xm7e44fdq-lm.a.run.app/api/auth";
-const AUTH_API_BASE_URL = `/api/auth`;
+const AUTH_API_BASE_URL = process.env.REACT_APP_MODE === "development" ? `http://${process.env.REACT_APP_SERVER_URL}/api/auth` : `/api/auth`;
 
 
 export type TypeActionAuth = "sign-up" | "login";

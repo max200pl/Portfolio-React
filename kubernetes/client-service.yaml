@@ -4,7 +4,7 @@ metadata:
   name: client-service
 spec:
   selector:
-    app: client
+    group: client
   type: LoadBalancer
   ports:
     - protocol: TCP

@@ -27,11 +27,11 @@ spec: #configurer the deployment
                   name: portfolio-react-config
                   key: server-port
           ports:
-            - containerPort: 80
+            - containerPort: 8000
           livenessProbe: # check the health of the pod
             httpGet:
               path: /api/works
-              port: 80
+              port: 8000
             initialDelaySeconds: 3 #delay before the probe starts
             periodSeconds: 3 #how often to perform the probe
             timeoutSeconds: 1 #when the probe times out

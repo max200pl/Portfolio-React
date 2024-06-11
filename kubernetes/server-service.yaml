@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: server-service #name of the service
   labels:
-    app: server
+    group: server #label
 spec:
   selector:
-    app: server #label of the pod
-  type: ClusterIP #not be reached from outside the cluster
+    group: server #label of the pod
+  type: ClusterIP   #not be reached from outside the cluster
   ports:
     - protocol: TCP
-      port: 80 #port of the service
-      targetPort: 80 #port of the pod
+      port: 8000 #port of the service
+      targetPort: 8000 #port of the pod

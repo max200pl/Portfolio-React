@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-secrets
+data:
+  MONGO_URL: mongodb+srv://max200pl:29121994mO111@cluster0.1evvjy7.mongodb.net/Portfolio?retryWrites=true&w=majority
+  GITHUB_CLIENT_ID: d54cbcb0435f980b2bf1
+  GITHUB_CLIENT_SECRET: eaf38ff60a55ea845ce8840614ea089ee8f70dd0
+  COOKIE_KEY_1: secretkey
+  COOKIE_KEY_2: secretkeyforrotation

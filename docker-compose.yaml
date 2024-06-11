@@ -5,7 +5,7 @@ services:
     build: ./client
     environment:
       REACT_APP_MODE: "development"
-      REACT_APP_SERVER_URL: "http://localhost"
+      REACT_APP_SERVER_URL: "localhost:8000"
     container_name: client
     volumes:
       - ./client/src:/app/src #bind mount
@@ -19,7 +19,7 @@ services:
     build: ./server
     container_name: server
     ports:
-      - "80:80"
+      - "8000:8000"
     volumes:
       - logs:/app/logs #volume
       - ./server:/app #bind mount

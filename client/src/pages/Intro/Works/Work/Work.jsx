@@ -16,7 +16,7 @@ export const Work = ({
     // const NODE_ENV = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://portfolio-react-2xm7e44fdq-lm.a.run.app';
     // const BASE_URL = `http://${process.env.REACT_APP_SERVER_URL}`;
     // const urlImage = `${BASE_URL}/api/works/image?project=${folderName}&name=${imageName}`;
-    const urlImage = `/api/works/image?project=${folderName}&name=${imageName}`;
+    const urlImage = process.env.REACT_APP_MODE === "development" ? `http://${process.env.REACT_APP_SERVER_URL}/api/works/image?project=${folderName}&name=${imageName}` : `/api/works/image?project=${folderName}&name=${imageName}`;
 
     return (
         <div className={s.work}
