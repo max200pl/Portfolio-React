@@ -6,17 +6,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portfolio-react #label
-      group: client
+      app: client
   template:
     metadata:
       labels:
-        app: portfolio-react #label
-        group: client
+        app: client
     spec:
       containers:
       - name: client
         imagePullPolicy: Always
         image: maksymposkannyi/portfolio-react-prod-client
-
-

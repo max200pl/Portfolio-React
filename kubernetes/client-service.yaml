@@ -4,7 +4,7 @@ metadata:
   name: client-service
 spec:
   selector:
-    group: client
+    app: client # Update the selector to match the labels of your server pods
   type: LoadBalancer
   ports:
     - protocol: TCP

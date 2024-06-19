@@ -1,55 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server-deployment #name of the deployment
-spec: #configurer the deployment
-  replicas: 1 #hove many pods
-  selector: #select the pods to manage by the deployment controller
-    matchLabels: #match the labels
-      app: portfolio-react #label
-      group: server #label
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
   template:
     metadata:
       labels:
-        app: portfolio-react #label
-        group: server #label
+        app: server
     spec:
-      containers: #specify the containers
+      containers:
         - name: server
           imagePullPolicy: Always
           image: maksymposkannyi/portfolio-react-prod-server
           env:
             - name: MONGO_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: my-secrets
-                  key: MONGO_URL
+              value: mongodb+srv://max200pl:29121994mO111@cluster0.1evvjy7.mongodb.net/Portfolio?retryWrites=true&w=majority
             - name: GITHUB_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: my-secrets
-                  key: GITHUB_CLIENT_ID
+              value: d54cbcb0435f980b2bf1
             - name: GITHUB_CLIENT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  name: my-secrets
-                  key: GITHUB_CLIENT_SECRET
+              value: eaf38ff60a55ea845ce8840614ea089ee8f70dd0
             - name: COOKIE_KEY_1
-              valueFrom:
-                configMapKeyRef:
-                  name: my-secrets
-                  key: COOKIE_KEY_1
+              value: secretkey
             - name: COOKIE_KEY_2
-              valueFrom:
-                configMapKeyRef:
-                  name: my-secrets
-                  key: COOKIE_KEY_2
-          # livenessProbe: # check the health of the pod
-          #   httpGet:
-          #     path: /api/works
-          #     port: 8000
-          #   initialDelaySeconds: 3 #delay before the probe starts
-          #   periodSeconds: 3 #how often to perform the probe
-          #   timeoutSeconds: 1 #when the probe times out
-          #   successThreshold: 1 #how many times the probe must be successful
-          #   failureThreshold: 3 #how many times the probe must fail
+              value: secretkeyforrotation
